@@ -1,16 +1,18 @@
-<div class="containter" style="padding: 20px">
-  <h1>Choose a photo:</h1>
-  <div class="row card-group">
-    <div class="col-sm-3" *ngFor="let image of images; let i = index" style="padding: 10px">
-      <div class="card">
-        <img [src]="image" style="width: 100%; height: 15rem; object-fit: cover">
-        <div class="card-block" style="padding: 10px">
-          <p class="card-text">{{ imageNames[i] }}</p>
-        </div>
-        <div class="card-block" style="padding: 10px">
-          <button type="button" mat-raised-button class="btn btn-secondary" (click)=select(images[i]) style="width: 50%">Select</button>
+<body>
+  <div class="containter">
+    <h1>Choose a photo:</h1>
+    <div class="row card-group">
+      <div class="col-sm-3" *ngFor="let image of images; let i = index" style="padding: 10px">
+        <div class="card border-danger mb-3">
+          <img [src]="image" style="width: 100%; height: 15rem; object-fit: cover">
+          <div class="card-block" style="padding: 10px">
+            <p class="card-text">{{ imageNames[i] }}</p>
+          </div>
+          <div class="card-block" style="padding: 10px; margin: 0 auto; float: none">
+            <button type="button" mat-raised-button class="btn btn-danger" (click)=select(images[i])>Select</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>

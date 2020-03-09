@@ -21,12 +21,20 @@ body {
 }
 
 h1 {
-  color: #66FCF1;
+  color: #c3073F;
   font-family: Rubik-Bold;
 }
 
 p {
-  color: #C5C6C7;
+  color: white;
+}
+
+h5 {
+  color: #950740
+}
+
+.footP {
+  color: #4e4e50
 }
 
 .bullets {

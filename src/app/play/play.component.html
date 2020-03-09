@@ -1,40 +1,42 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">FYP</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/Home" routerLinkActive="active">Home</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/Editor" routerLinkActive="active">Photos</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/Create" routerLinkActive="active">Create</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/Play" routerLinkActive="active">Play</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<div class="containter" style="padding: 20px">
-  <h1>Play Page</h1>
-  <div class="row card-group">
-    <div class="col-sm-4" *ngFor="let song of songs; let i = index" style="padding: 10px">
-      <div class="card">
-        <div class="card-block" style="padding: 10px">
-          <h3 class="card-title">{{ song.name }}</h3>
-          <p class="card-text">{{ song.chords }}</p>
-        </div>
-        <div class="card-block" style="padding: 10px">
-          <button [attr.id]="i" style="width: 30%" mat-raised-button class="btn btn-secondary" type="button" (click)=selectSong(i)>Select</button>
-          <button type="button" mat-raised-button class="btn btn-secondary" (click)=deleteSong(song) style="width: 30%">Delete</button>
+<body>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <nav class="navbar navbar-expand-md navbar-default">
+    <a class="navbar-brand" style="color:#c3073F" href="#">FYP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/Home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/Editor" routerLinkActive="active">Photos</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/Create" routerLinkActive="active">Create</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/Play" routerLinkActive="active">Play</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="containter" style="padding: 20px">
+    <h1>Play Page</h1>
+    <div class="row card-group">
+      <div class="col-sm-3" *ngFor="let song of songs; let i = index" style="padding: 10px">
+        <div class="card">
+          <div class="card-block" style="padding: 10px">
+            <h3 class="card-title">{{ song.name }}</h3>
+            <p class="card-text">{{ song.chords }}</p>
+          </div>
+          <div class="card-block" style="padding: 10px; margin: 0 auto; float: none;">
+            <button [attr.id]="i" style="margin-right: 20px" mat-raised-button class="btn btn-light" type="button" (click)=selectSong(i)>Select</button>
+            <button type="button" mat-raised-button class="btn btn-light" (click)=deleteSong(song)>Delete</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>

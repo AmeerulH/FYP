@@ -13,7 +13,7 @@ import { MidiService } from '../services/midi.service';
 })
 export class PlayComponent implements OnInit {
   songNames: string[];
-  chords: number[];
+  chords: Array<{chord: number[]}> = [];
   urls: string[];
   songs: Song[];
   song: Song;
@@ -43,16 +43,20 @@ export class PlayComponent implements OnInit {
     }
 
     this.chords = this.song.chords;
+    console.log(this.chords);
+
     this.songName = this.song.name;
     this.urls = this.song.urls;
     this.midiService.setSong(this.chords, this.urls);
+
+    this.midiService.turn = 0;
 
     const dialogRef = this.dialog.open(SongComponent, {
       data: {
         song: this.song
       },
       height: '600px',
-      width: '1200px'
+      width: '1200px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -14,8 +14,8 @@ import { Song } from '../shared/song';
 })
 export class CreatorComponent implements OnInit {
   numChords: number[] = [];
-  chords: string[] = [];
-  chordsMIDI: number[] = [];
+  chords: Array<{chord: string[]}> = [];
+  chordsMIDI: Array<{chord: number[]}> = [];
   songName: string;
   currentUpload: FileUpload;
   images: string[];
@@ -85,479 +85,492 @@ export class CreatorComponent implements OnInit {
   }
 
   enterChordsButton(chord: string) {
-    const chords: string[] = [];
+    const chords: Array<{chord: string}> = [];
+    let temp: string[];
+    let temp2: number[] = [];
+
     for (let i = 0; i < this.numChords.length; i++) {
       chord = (document.getElementById(i.toString()) as HTMLInputElement).value;
-      chords[i] = chord;
+      chords.push({chord});
     }
 
-    this.chords = chords;
+    // tslint:disable-next-line: prefer-for-of
+    for (let j = 0; j < chords.length; j++) {
+      temp = chords[j].chord.split(',');
+      this.chords.push({chord: temp});
+    }
+
+    console.log(this.chords);
 
     for (let i = 0; i < this.chords.length; i++) {
-      switch (this.chords[i]) {
-          case 'A0':
-            this.chordsMIDI[i] = 21;
-            break;
-          case 'A#0':
-            this.chordsMIDI[i] = 22;
-            break;
-          case 'Bb0':
-            this.chordsMIDI[i] = 22;
-            break;
-          case 'B0':
-            this.chordsMIDI[i] = 23;
-            break;
-          case 'C1':
-            this.chordsMIDI[i] = 24;
-            break;
-          case 'C#1':
-            this.chordsMIDI[i] = 25;
-            break;
-          case 'Db1':
-            this.chordsMIDI[i] = 25;
-            break;
-          case 'D1':
-            this.chordsMIDI[i] = 26;
-            break;
-          case 'D#1':
-            this.chordsMIDI[i] = 27;
-            break;
-          case 'Eb1':
-            this.chordsMIDI[i] = 27;
-            break;
-          case 'E1':
-            this.chordsMIDI[i] = 28;
-            break;
-          case 'F1':
-            this.chordsMIDI[i] = 29;
-            break;
-          case 'F#1':
-            this.chordsMIDI[i] = 30;
-            break;
-          case 'Gb1':
-            this.chordsMIDI[i] = 30;
-            break;
-          case 'G1':
-            this.chordsMIDI[i] = 31;
-            break;
-          case 'G#1':
-            this.chordsMIDI[i] = 32;
-            break;
-          case 'Ab1':
-            this.chordsMIDI[i] = 32;
-            break;
-          case 'A1':
-            this.chordsMIDI[i] = 33;
-            break;
-          case 'A#1':
-            this.chordsMIDI[i] = 34;
-            break;
-          case 'Bb1':
-            this.chordsMIDI[i] = 34;
-            break;
-          case 'B1':
-            this.chordsMIDI[i] = 35;
-            break;
-          case 'C2':
-            this.chordsMIDI[i] = 36;
-            break;
-          case 'C#2':
-            this.chordsMIDI[i] = 37;
-            break;
-          case 'Db2':
-            this.chordsMIDI[i] = 37;
-            break;
-          case 'D2':
-            this.chordsMIDI[i] = 38;
-            break;
-          case 'D#2':
-            this.chordsMIDI[i] = 39;
-            break;
-          case 'Eb2':
-            this.chordsMIDI[i] = 39;
-            break;
-          case 'E2':
-            this.chordsMIDI[i] = 40;
-            break;
-          case 'F2':
-            this.chordsMIDI[i] = 41;
-            break;
-          case 'F#2':
-            this.chordsMIDI[i] = 42;
-            break;
-          case 'Gb2':
-            this.chordsMIDI[i] = 42;
-            break;
-          case 'G2':
-            this.chordsMIDI[i] = 43;
-            break;
-          case 'G#2':
-            this.chordsMIDI[i] = 44;
-            break;
-          case 'Ab2':
-            this.chordsMIDI[i] = 44;
-            break;
-          case 'A2':
-            this.chordsMIDI[i] = 45;
-            break;
-          case 'A#2':
-            this.chordsMIDI[i] = 46;
-            break;
-          case 'Bb2':
-            this.chordsMIDI[i] = 46;
-            break;
-          case 'B2':
-            this.chordsMIDI[i] = 47;
-            break;
-          case 'C3':
-            this.chordsMIDI[i] = 48;
-            break;
-          case 'C#3':
-            this.chordsMIDI[i] = 49;
-            break;
-          case 'Db3':
-            this.chordsMIDI[i] = 49;
-            break;
-          case 'D3':
-            this.chordsMIDI[i] = 50;
-            break;
-          case 'D#3':
-            this.chordsMIDI[i] = 51;
-            break;
-          case 'Eb3':
-            this.chordsMIDI[i] = 51;
-            break;
-          case 'E3':
-            this.chordsMIDI[i] = 52;
-            break;
-          case 'F3':
-            this.chordsMIDI[i] = 53;
-            break;
-          case 'F#3':
-            this.chordsMIDI[i] = 54;
-            break;
-          case 'Gb3':
-            this.chordsMIDI[i] = 54;
-            break;
-          case 'G3':
-            this.chordsMIDI[i] = 55;
-            break;
-          case 'G#3':
-            this.chordsMIDI[i] = 56;
-            break;
-          case 'Ab3':
-            this.chordsMIDI[i] = 56;
-            break;
-          case 'A3':
-            this.chordsMIDI[i] = 57;
-            break;
-          case 'A#3':
-            this.chordsMIDI[i] = 58;
-            break;
-          case 'Bb3':
-            this.chordsMIDI[i] = 58;
-            break;
-          case 'B3':
-            this.chordsMIDI[i] = 59;
-            break;
-          case 'C4':
-            this.chordsMIDI[i] = 60;
-            break;
-          case 'C#4':
-            this.chordsMIDI[i] = 61;
-            break;
-          case 'Db4':
-            this.chordsMIDI[i] = 61;
-            break;
-          case 'D4':
-            this.chordsMIDI[i] = 62;
-            break;
-          case 'D#4':
-            this.chordsMIDI[i] = 63;
-            break;
-          case 'Eb4':
-            this.chordsMIDI[i] = 63;
-            break;
-          case 'E4':
-            this.chordsMIDI[i] = 64;
-            break;
-          case 'F4':
-            this.chordsMIDI[i] = 65;
-            break;
-          case 'F#4':
-            this.chordsMIDI[i] = 66;
-            break;
-          case 'Gb4':
-            this.chordsMIDI[i] = 66;
-            break;
-          case 'G4':
-            this.chordsMIDI[i] = 67;
-            break;
-          case 'G#4':
-            this.chordsMIDI[i] = 68;
-            break;
-          case 'Ab4':
-            this.chordsMIDI[i] = 68;
-            break;
-          case 'A4':
-            this.chordsMIDI[i] = 69;
-            break;
-          case 'A#4':
-            this.chordsMIDI[i] = 70;
-            break;
-          case 'Bb4':
-            this.chordsMIDI[i] = 70;
-            break;
-          case 'B4':
-            this.chordsMIDI[i] = 71;
-            break;
-          case 'C5':
-            this.chordsMIDI[i] = 72;
-            break;
-          case 'C#5':
-            this.chordsMIDI[i] = 73;
-            break;
-          case 'Db5':
-            this.chordsMIDI[i] = 73;
-            break;
-          case 'D5':
-            this.chordsMIDI[i] = 74;
-            break;
-          case 'D#5':
-            this.chordsMIDI[i] = 75;
-            break;
-          case 'Eb5':
-            this.chordsMIDI[i] = 75;
-            break;
-          case 'E5':
-            this.chordsMIDI[i] = 76;
-            break;
-          case 'F5':
-            this.chordsMIDI[i] = 77;
-            break;
-          case 'F#5':
-            this.chordsMIDI[i] = 78;
-            break;
-          case 'Gb5':
-            this.chordsMIDI[i] = 78;
-            break;
-          case 'G5':
-            this.chordsMIDI[i] = 79;
-            break;
-          case 'G#5':
-            this.chordsMIDI[i] = 80;
-            break;
-          case 'Ab5':
-            this.chordsMIDI[i] = 80;
-            break;
-          case 'A5':
-            this.chordsMIDI[i] = 81;
-            break;
-          case 'A#5':
-            this.chordsMIDI[i] = 82;
-            break;
-          case 'Bb5':
-            this.chordsMIDI[i] = 82;
-            break;
-          case 'B5':
-            this.chordsMIDI[i] = 83;
-            break;
-          case 'C6':
-            this.chordsMIDI[i] = 84;
-            break;
-          case 'C#6':
-            this.chordsMIDI[i] = 85;
-            break;
-          case 'Db6':
-            this.chordsMIDI[i] = 85;
-            break;
-          case 'D6':
-            this.chordsMIDI[i] = 86;
-            break;
-          case 'D#6':
-            this.chordsMIDI[i] = 87;
-            break;
-          case 'Eb6':
-            this.chordsMIDI[i] = 87;
-            break;
-          case 'E6':
-            this.chordsMIDI[i] = 88;
-            break;
-          case 'F6':
-            this.chordsMIDI[i] = 89;
-            break;
-          case 'F#6':
-            this.chordsMIDI[i] = 90;
-            break;
-          case 'Gb6':
-            this.chordsMIDI[i] = 90;
-            break;
-          case 'G6':
-            this.chordsMIDI[i] = 91;
-            break;
-          case 'G#6':
-            this.chordsMIDI[i] = 92;
-            break;
-          case 'Ab6':
-            this.chordsMIDI[i] = 92;
-            break;
-          case 'A6':
-            this.chordsMIDI[i] = 93;
-            break;
-          case 'A#6':
-            this.chordsMIDI[i] = 94;
-            break;
-          case 'Bb6':
-            this.chordsMIDI[i] = 94;
-            break;
-          case 'B6':
-            this.chordsMIDI[i] = 95;
-            break;
-          case 'C7':
-            this.chordsMIDI[i] = 96;
-            break;
-          case 'C#7':
-            this.chordsMIDI[i] = 97;
-            break;
-          case 'Db7':
-            this.chordsMIDI[i] = 97;
-            break;
-          case 'D7':
-            this.chordsMIDI[i] = 98;
-            break;
-          case 'D#7':
-            this.chordsMIDI[i] = 99;
-            break;
-          case 'Eb7':
-            this.chordsMIDI[i] = 99;
-            break;
-          case 'E7':
-            this.chordsMIDI[i] = 100;
-            break;
-          case 'F7':
-            this.chordsMIDI[i] = 101;
-            break;
-          case 'F#7':
-            this.chordsMIDI[i] = 102;
-            break;
-          case 'Gb7':
-            this.chordsMIDI[i] = 102;
-            break;
-          case 'G7':
-            this.chordsMIDI[i] = 103;
-            break;
-          case 'G#7':
-            this.chordsMIDI[i] = 104;
-            break;
-          case 'Ab7':
-            this.chordsMIDI[i] = 104;
-            break;
-          case 'A7':
-            this.chordsMIDI[i] = 105;
-            break;
-          case 'A#7':
-            this.chordsMIDI[i] = 106;
-            break;
-          case 'Bb7':
-            this.chordsMIDI[i] = 106;
-            break;
-          case 'B7':
-            this.chordsMIDI[i] = 107;
-            break;
-          case 'C8':
-            this.chordsMIDI[i] = 108;
-            break;
-          case 'C#8':
-            this.chordsMIDI[i] = 109;
-            break;
-          case 'Db8':
-            this.chordsMIDI[i] = 109;
-            break;
-          case 'D8':
-            this.chordsMIDI[i] = 110;
-            break;
-          case 'D#8':
-            this.chordsMIDI[i] = 111;
-            break;
-          case 'Eb8':
-            this.chordsMIDI[i] = 111;
-            break;
-          case 'E8':
-            this.chordsMIDI[i] = 112;
-            break;
-          case 'F8':
-            this.chordsMIDI[i] = 113;
-            break;
-          case 'F#8':
-            this.chordsMIDI[i] = 114;
-            break;
-          case 'Gb8':
-            this.chordsMIDI[i] = 114;
-            break;
-          case 'G8':
-            this.chordsMIDI[i] = 115;
-            break;
-          case 'G#8':
-            this.chordsMIDI[i] = 116;
-            break;
-          case 'Ab8':
-            this.chordsMIDI[i] = 116;
-            break;
-          case 'A8':
-            this.chordsMIDI[i] = 117;
-            break;
-          case 'A#8':
-            this.chordsMIDI[i] = 118;
-            break;
-          case 'Bb8':
-            this.chordsMIDI[i] = 118;
-            break;
-          case 'B8':
-            this.chordsMIDI[i] = 119;
-            break;
-          case 'C9':
-            this.chordsMIDI[i] = 120;
-            break;
-          case 'C#9':
-            this.chordsMIDI[i] = 121;
-            break;
-          case 'Db9':
-            this.chordsMIDI[i] = 121;
-            break;
-          case 'D9':
-            this.chordsMIDI[i] = 122;
-            break;
-          case 'D#9':
-            this.chordsMIDI[i] = 123;
-            break;
-          case 'Eb9':
-            this.chordsMIDI[i] = 123;
-            break;
-          case 'E9':
-            this.chordsMIDI[i] = 124;
-            break;
-          case 'F9':
-            this.chordsMIDI[i] = 125;
-            break;
-          case 'F#9':
-            this.chordsMIDI[i] = 126;
-            break;
-          case 'Gb9':
-            this.chordsMIDI[i] = 126;
-            break;
-          case 'G9':
-            this.chordsMIDI[i] = 127;
-            break;
-          case 'G#9':
-            this.chordsMIDI[i] = 128;
-            break;
-          case 'Ab9':
-            this.chordsMIDI[i] = 128;
-            break;
+      temp2 = [];
+      for (let j = 0; j < this.chords[i].chord.length; j++) {
+        switch (this.chords[i].chord[j]) {
+            case 'A0':
+              temp2.push(21);
+              break;
+            case 'A#0':
+              temp2.push(22);
+              break;
+            case 'Bb0':
+              temp2.push(22);
+              break;
+            case 'B0':
+              temp2.push(23);
+              break;
+            case 'C1':
+              temp2.push(24);
+              break;
+            case 'C#1':
+              temp2.push(25);
+              break;
+            case 'Db1':
+              temp2.push(25);
+              break;
+            case 'D1':
+              temp2.push(26);
+              break;
+            case 'D#1':
+              temp2.push(27);
+              break;
+            case 'Eb1':
+              temp2.push(27);
+              break;
+            case 'E1':
+              temp2.push(28);
+              break;
+            case 'F1':
+              temp2.push(29);
+              break;
+            case 'F#1':
+              temp2.push(30);
+              break;
+            case 'Gb1':
+              temp2.push(30);
+              break;
+            case 'G1':
+              temp2.push(31);
+              break;
+            case 'G#1':
+              temp2.push(32);
+              break;
+            case 'Ab1':
+              temp2.push(32);
+              break;
+            case 'A1':
+              temp2.push(33);
+              break;
+            case 'A#1':
+              temp2.push(34);
+              break;
+            case 'Bb1':
+              temp2.push(34);
+              break;
+            case 'B1':
+              temp2.push(35);
+              break;
+            case 'C2':
+              temp2.push(36);
+              break;
+            case 'C#2':
+              temp2.push(37);
+              break;
+            case 'Db2':
+              temp2.push(37);
+              break;
+            case 'D2':
+              temp2.push(38);
+              break;
+            case 'D#2':
+              temp2.push(39);
+              break;
+            case 'Eb2':
+              temp2.push(39);
+              break;
+            case 'E2':
+              temp2.push(40);
+              break;
+            case 'F2':
+              temp2.push(41);
+              break;
+            case 'F#2':
+              temp2.push(42);
+              break;
+            case 'Gb2':
+              temp2.push(42);
+              break;
+            case 'G2':
+              temp2.push(43);
+              break;
+            case 'G#2':
+              temp2.push(44);
+              break;
+            case 'Ab2':
+              temp2.push(44);
+              break;
+            case 'A2':
+              temp2.push(45);
+              break;
+            case 'A#2':
+              temp2.push(46);
+              break;
+            case 'Bb2':
+              temp2.push(46);
+              break;
+            case 'B2':
+              temp2.push(47);
+              break;
+            case 'C3':
+              temp2.push(48);
+              break;
+            case 'C#3':
+              temp2.push(49);
+              break;
+            case 'Db3':
+              temp2.push(49);
+              break;
+            case 'D3':
+              temp2.push(50);
+              break;
+            case 'D#3':
+              temp2.push(51);
+              break;
+            case 'Eb3':
+              temp2.push(51);
+              break;
+            case 'E3':
+              temp2.push(52);
+              break;
+            case 'F3':
+              temp2.push(53);
+              break;
+            case 'F#3':
+              temp2.push(54);
+              break;
+            case 'Gb3':
+              temp2.push(54);
+              break;
+            case 'G3':
+              temp2.push(55);
+              break;
+            case 'G#3':
+              temp2.push(56);
+              break;
+            case 'Ab3':
+              temp2.push(56);
+              break;
+            case 'A3':
+              temp2.push(57);
+              break;
+            case 'A#3':
+              temp2.push(58);
+              break;
+            case 'Bb3':
+              temp2.push(58);
+              break;
+            case 'B3':
+              temp2.push(59);
+              break;
+            case 'C4':
+              temp2.push(60);
+              break;
+            case 'C#4':
+              temp2.push(61);
+              break;
+            case 'Db4':
+              temp2.push(61);
+              break;
+            case 'D4':
+              temp2.push(62);
+              break;
+            case 'D#4':
+              temp2.push(63);
+              break;
+            case 'Eb4':
+              temp2.push(63);
+              break;
+            case 'E4':
+              temp2.push(64);
+              break;
+            case 'F4':
+              temp2.push(65);
+              break;
+            case 'F#4':
+              temp2.push(66);
+              break;
+            case 'Gb4':
+              temp2.push(66);
+              break;
+            case 'G4':
+              temp2.push(67);
+              break;
+            case 'G#4':
+              temp2.push(68);
+              break;
+            case 'Ab4':
+              temp2.push(68);
+              break;
+            case 'A4':
+              temp2.push(69);
+              break;
+            case 'A#4':
+              temp2.push(70);
+              break;
+            case 'Bb4':
+              temp2.push(70);
+              break;
+            case 'B4':
+              temp2.push(71);
+              break;
+            case 'C5':
+              temp2.push(72);
+              break;
+            case 'C#5':
+              temp2.push(73);
+              break;
+            case 'Db5':
+              temp2.push(73);
+              break;
+            case 'D5':
+              temp2.push(74);
+              break;
+            case 'D#5':
+              temp2.push(75);
+              break;
+            case 'Eb5':
+              temp2.push(75);
+              break;
+            case 'E5':
+              temp2.push(76);
+              break;
+            case 'F5':
+              temp2.push(77);
+              break;
+            case 'F#5':
+              temp2.push(78);
+              break;
+            case 'Gb5':
+              temp2.push(78);
+              break;
+            case 'G5':
+              temp2.push(79);
+              break;
+            case 'G#5':
+              temp2.push(80);
+              break;
+            case 'Ab5':
+              temp2.push(80);
+              break;
+            case 'A5':
+              temp2.push(81);
+              break;
+            case 'A#5':
+              temp2.push(82);
+              break;
+            case 'Bb5':
+              temp2.push(82);
+              break;
+            case 'B5':
+              temp2.push(83);
+              break;
+            case 'C6':
+              temp2.push(84);
+              break;
+            case 'C#6':
+              temp2.push(85);
+              break;
+            case 'Db6':
+              temp2.push(85);
+              break;
+            case 'D6':
+              temp2.push(86);
+              break;
+            case 'D#6':
+              temp2.push(87);
+              break;
+            case 'Eb6':
+              temp2.push(87);
+              break;
+            case 'E6':
+              temp2.push(88);
+              break;
+            case 'F6':
+              temp2.push(89);
+              break;
+            case 'F#6':
+              temp2.push(90);
+              break;
+            case 'Gb6':
+              temp2.push(90);
+              break;
+            case 'G6':
+              temp2.push(91);
+              break;
+            case 'G#6':
+              temp2.push(92);
+              break;
+            case 'Ab6':
+              temp2.push(92);
+              break;
+            case 'A6':
+              temp2.push(93);
+              break;
+            case 'A#6':
+              temp2.push(94);
+              break;
+            case 'Bb6':
+              temp2.push(94);
+              break;
+            case 'B6':
+              temp2.push(95);
+              break;
+            case 'C7':
+              temp2.push(96);
+              break;
+            case 'C#7':
+              temp2.push(97);
+              break;
+            case 'Db7':
+              temp2.push(97);
+              break;
+            case 'D7':
+              temp2.push(98);
+              break;
+            case 'D#7':
+              temp2.push(99);
+              break;
+            case 'Eb7':
+              temp2.push(99);
+              break;
+            case 'E7':
+              temp2.push(100);
+              break;
+            case 'F7':
+              temp2.push(101);
+              break;
+            case 'F#7':
+              temp2.push(102);
+              break;
+            case 'Gb7':
+              temp2.push(102);
+              break;
+            case 'G7':
+              temp2.push(103);
+              break;
+            case 'G#7':
+              temp2.push(104);
+              break;
+            case 'Ab7':
+              temp2.push(104);
+              break;
+            case 'A7':
+              temp2.push(105);
+              break;
+            case 'A#7':
+              temp2.push(106);
+              break;
+            case 'Bb7':
+              temp2.push(106);
+              break;
+            case 'B7':
+              temp2.push(108);
+              break;
+            case 'C8':
+              temp2.push(108);
+              break;
+            case 'C#8':
+              temp2.push(109);
+              break;
+            case 'Db8':
+              temp2.push(109);
+              break;
+            case 'D8':
+              temp2.push(110);
+              break;
+            case 'D#8':
+              temp2.push(111);
+              break;
+            case 'Eb8':
+              temp2.push(111);
+              break;
+            case 'E8':
+              temp2.push(112);
+              break;
+            case 'F8':
+              temp2.push(113);
+              break;
+            case 'F#8':
+              temp2.push(114);
+              break;
+            case 'Gb8':
+              temp2.push(114);
+              break;
+            case 'G8':
+              temp2.push(115);
+              break;
+            case 'G#8':
+              temp2.push(116);
+              break;
+            case 'Ab8':
+              temp2.push(116);
+              break;
+            case 'A8':
+              temp2.push(117);
+              break;
+            case 'A#8':
+              temp2.push(118);
+              break;
+            case 'Bb8':
+              temp2.push(118);
+              break;
+            case 'B8':
+              temp2.push(119);
+              break;
+            case 'C9':
+              temp2.push(120);
+              break;
+            case 'C#9':
+              temp2.push(121);
+              break;
+            case 'Db9':
+              temp2.push(121);
+              break;
+            case 'D9':
+              temp2.push(122);
+              break;
+            case 'D#9':
+              temp2.push(123);
+              break;
+            case 'Eb9':
+              temp2.push(123);
+              break;
+            case 'E9':
+              temp2.push(124);
+              break;
+            case 'F9':
+              temp2.push(125);
+              break;
+            case 'F#9':
+              temp2.push(126);
+              break;
+            case 'Gb9':
+              temp2.push(126);
+              break;
+            case 'G9':
+              temp2.push(127);
+              break;
+            case 'G#9':
+              temp2.push(128);
+              break;
+            case 'Ab9':
+              temp2.push(128);
+              break;
+        }
       }
+      this.chordsMIDI.push({chord: temp2});
     }
 
-    console.log('Chords: ' + this.chordsMIDI);
+    console.log(this.chordsMIDI);
   }
 
 }

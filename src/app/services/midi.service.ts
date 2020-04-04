@@ -10,12 +10,13 @@ export class MidiService {
   // Variable which tell us what step of the game we're on.
   // We'll use this later when we parse noteOn/Off messages
   private currentStep = 0;
+  turn = 0;
 
   correctNoteSequence = [60, 65, 69, 65, 69, 67, 65, 62, 60]; // Amazing Grace in F
   activeNoteSequence = [];
 
-  private notes = [];
-  private activeNote = [];
+  chords: Array<{chord: number[]}> = [];
+  private activeChord = [];
   private urls = [];
   private image: string;
 
@@ -76,52 +77,53 @@ export class MidiService {
   noteOn(note: any, velocity: any) {
     switch (this.currentStep) {
       case 0:
-        this.activeNote.push(note);
-        if (this.activeNote.length === this.notes.length) {
-          let match = true;
+        console.log(this.turn);
 
+        this.activeChord.push(note);
+        if (this.activeChord.length === this.chords[this.turn].chord.length) {
+          let match = true;
+          console.log(this.activeChord);
           // tslint:disable-next-line: prefer-for-of
-          for (let index = 0; index < this.activeNote.length; index++) {
-            if (this.activeNote[index] !== this.notes[index]) {
-              console.log('wrong');
+          for (let i = 0; i < this.activeChord.length; i++) {
+            // tslint:disable-next-line: prefer-for-of
+            if (this.activeChord[i] !== this.chords[this.turn].chord[i]) {
               match = false;
               break;
-            } else {
-              console.log('correct');
             }
           }
 
-          this.activeNote = [];
-
           if (match) {
-            console.log('Correct Note!');
-            this.urlService.updateUrlList(this.urls[0]);
-            document.getElementById('url').setAttribute('src', this.urls[0]);
-            this.activeNote = [];
-          } else {
-            // Clear array and start over
-            console.log('Wrong Note!');
-            this.activeNote = [];
+            console.log('Correct Chord!');
+            this.urlService.updateUrlList(this.urls[this.turn]);
+            document.getElementById('url').setAttribute('src', this.urls[this.turn]);
+            this.turn++;
           }
+
+          if(this.turn === this.chords.length) {
+            this.turn = 0;
+          }
+
         }
-        break;
-    }
+      }
   }
 
   // Function to handle if key is released
   noteOff(note: any) {
     switch (this.currentStep) {
-
+      case 0:
+        // Remove the note value from the active chord array
+        this.activeChord.splice(this.activeChord.indexOf(note), 1);
+        break;
     }
   }
 
-  setSong(n: number[], u: any[]) {
-    this.notes = [];
+  setSong(c: Array<{chord: number[]}>, u: any[]) {
+    this.chords = [];
     this.urls = [];
 
     // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < n.length; i++) {
-      this.notes[i] = n[i];
+    for (let i = 0; i < c.length; i++) {
+      this.chords.push({chord: c[i].chord});
       this.urls[i] = u[i];
     }
   }

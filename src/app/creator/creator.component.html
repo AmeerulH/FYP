@@ -47,7 +47,7 @@
       <h2 *ngIf="chords.length != 0">Choose photos for each chord</h2>
       <div class="row">
         <div class="col-sm-4" *ngFor="let chord of chords" style="padding-left: 50px; padding-right: 50px; padding-top: 20px">
-          <button style="width: 100%" mat-raised-button class="btn btn-danger" type="button" (click)=choosePhoto()>Chord: {{ chord }}</button>
+          <button style="width: 100%" mat-raised-button class="btn btn-danger" type="button" (click)=choosePhoto()>Chord: {{ numChord }}</button>
         </div>
       </div><br>
       <div class="row" style="padding-left: 50px; padding-right: 50px; padding-bottom: 30px; margin: 0 auto; float: none">

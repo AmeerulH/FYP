@@ -102,8 +102,10 @@ export class CreatorComponent implements OnInit {
 
     console.log(this.chords);
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.chords.length; i++) {
       temp2 = [];
+      // tslint:disable-next-line: prefer-for-of
       for (let j = 0; j < this.chords[i].chord.length; j++) {
         switch (this.chords[i].chord[j]) {
             case 'A0':
@@ -473,7 +475,7 @@ export class CreatorComponent implements OnInit {
               temp2.push(106);
               break;
             case 'B7':
-              temp2.push(108);
+              temp2.push(107);
               break;
             case 'C8':
               temp2.push(108);

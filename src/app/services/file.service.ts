@@ -145,6 +145,41 @@ export class FileService {
     return songNames;
   }
 
+  getNotes() {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    const notesRef = storageRef.child('notes');
+    const notes: string[] = [];
+    const temp: string[] = [];
+
+    notesRef.listAll().then((res) => {
+      res.items.forEach((element, i) => {
+        element.getMetadata().then(
+          value => notes[i] = value.name.replace(/.m4a/g, '')
+        );
+      });
+    });
+
+    return notes;
+  }
+
+  getNotesUrl() {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    const notesRef = storageRef.child('notes');
+    const notes: string[] = [];
+
+    notesRef.listAll().then((res) => {
+      res.items.forEach((element, i) => {
+        element.getDownloadURL().then( value =>
+          notes[i] = value
+        );
+      });
+    });
+
+    return notes;
+  }
+
   deleteImage(url: string) {
     return this.storage.storage.refFromURL(url).delete();
   }

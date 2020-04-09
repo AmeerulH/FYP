@@ -25,11 +25,11 @@
   <div class="containter" style="padding: 20px">
     <h1>Play Page</h1>
     <div class="row card-group">
-      <div class="col-sm-3" *ngFor="let song of songs; let i = index" style="padding: 10px">
+      <div class="col-sm-2" *ngFor="let song of songs; let i = index" style="padding: 10px">
         <div class="card">
           <div class="card-block" style="padding: 10px">
             <h3 class="card-title">{{ song.name }}</h3>
-            <p class="card-text">{{ song.chords }}</p>
+            <p class="card-text">Chords in this song: {{ song.chords.length }}</p>
           </div>
           <div class="card-block" style="padding: 10px; margin: 0 auto; float: none;">
             <button [attr.id]="i" style="margin-right: 20px" mat-raised-button class="btn btn-light" type="button" (click)=selectSong(i)>Select</button>
@@ -38,5 +38,38 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="page-footer font-small special-color-dark pt-4" style="background: #d3d3d3">
+    <!-- Footer Text -->
+    <div class="container-fluid text-center text-md-left" style="padding-left: 50px; padding-right: 50px;">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold" style="text-align: justify">Brief Information About Project</h5>
+          <p class="footP">This website is my final year project and I am being supervised by Dr. Marina. My main goals are:</p>
+          <p class="footP">   • To design and develop a performing arts-based technology that can be integrated within a classroom.</p>
+          <p class="footP">   • Determine how the performing arts nurture skills such as thinking/cognitive, social, mathematical, reading and language skills at an early age?</p>
+        </div>
+        <!-- Grid column -->
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <!-- Grid column -->
+        <div class="col-md-6 mb-md-0 mb-3">
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold">Contact Me:</h5>
+          <p class="footP">Name: Muhammad Ameerul Hady bin Zul Hadi</p>
+          <p class="footP">Phone Number: 0162234826</p>
+          <p class="footP">Email Address: hcymz1@nottingham.edu.my</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Footer Text -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3" style="color: #950740">© Created by Muhammad Ameerul Hady bin Zul Hadi
+    </div>
+    <!-- Copyright -->
   </div>
 </body>

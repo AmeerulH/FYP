@@ -3,6 +3,7 @@ import { SongComponent } from '../dialogs/song/song.component';
 import { OnInit, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UrlService } from './urls.service';
+import { FileService } from './file.service';
 
 @Injectable()
 
@@ -11,23 +12,24 @@ export class MidiService {
   // We'll use this later when we parse noteOn/Off messages
   private currentStep = 0;
   turn = 0;
-
-  correctNoteSequence = [60, 65, 69, 65, 69, 67, 65, 62, 60]; // Amazing Grace in F
-  activeNoteSequence = [];
+  private notes = [];
+  private notesUrl: string[] = [];
 
   chords: Array<{chord: number[]}> = [];
   private activeChord = [];
   private urls = [];
-  private image: string;
 
-  constructor(private urlService: UrlService) { }
+  constructor(private urlService: UrlService,
+              private fileService: FileService) {
+    this.notes = this.fileService.getNotes();
+    this.notesUrl = this.fileService.getNotesUrl();
+  }
 
   // request MIDI access
   onMidiInit() {
     if (navigator.requestMIDIAccess) {
       console.log('This browser supports WebMIDI!');
       const mAccess = navigator.requestMIDIAccess();
-
       mAccess
         .then(this.onMIDISuccess.bind(this))
         .catch(this.onMIDIFailure.bind(this));
@@ -77,9 +79,15 @@ export class MidiService {
   noteOn(note: any, velocity: any) {
     switch (this.currentStep) {
       case 0:
-        console.log(this.turn);
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.notes.length; i++) {
+          if (note.toString() === this.notes[i].toString()) {
+            this.playAudio(this.notesUrl[i]);
+          }
+        }
 
         this.activeChord.push(note);
+
         if (this.activeChord.length === this.chords[this.turn].chord.length) {
           let match = true;
           console.log(this.activeChord);
@@ -99,7 +107,7 @@ export class MidiService {
             this.turn++;
           }
 
-          if(this.turn === this.chords.length) {
+          if (this.turn === this.chords.length) {
             this.turn = 0;
           }
 
@@ -126,5 +134,12 @@ export class MidiService {
       this.chords.push({chord: c[i].chord});
       this.urls[i] = u[i];
     }
+  }
+
+  playAudio(url: string) {
+    const audio = new Audio();
+    audio.src = url;
+    audio.load();
+    audio.play();
   }
 }

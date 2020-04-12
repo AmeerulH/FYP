@@ -6,6 +6,8 @@ import { FileUpload } from '../shared';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChoosePhotoComponent } from '../dialogs/choose-photo/choose-photo.component';
 import { Song } from '../shared/song';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creator',
@@ -25,14 +27,29 @@ export class CreatorComponent implements OnInit {
   songs: Song[];
   song: Song;
 
+  name = new FormControl('', [Validators.required]);
+  number = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^-?(0|[1-9]\d*)?$/),
+    Validators.min(1)
+  ]);
+  chord = new FormControl('', [Validators.required]);
+
   constructor(private fileService: FileService,
               private snackBar: MatSnackBar,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private router: Router) {
     this.images = fileService.getAllImages();
     this.imageNames = fileService.getAllImageNames();
   }
 
   ngOnInit() {}
+
+  openSnackBar() {
+    this.snackBar.open('Successfully uploaded song', 'Ok', {
+      duration: 5000,
+    });
+  }
 
   create(song: Song) {
     this.fileService.createSong(song);
@@ -47,6 +64,7 @@ export class CreatorComponent implements OnInit {
   }
 
   saveData(songName: string) {
+    this.openSnackBar();
     songName = (document.getElementById('name') as HTMLInputElement).value;
     for (let i = 0; i < this.urls.length; i++) {
       this.urlsFinal[i] = this.urls[i].url;
@@ -55,7 +73,9 @@ export class CreatorComponent implements OnInit {
     this.song = {name: songName, chords: this.chordsMIDI, urls: this.urlsFinal};
 
     this.fileService.createSong(this.song);
-    console.log(this.song);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/Create']);
+    });
   }
 
   displayChords(amount: string) {
@@ -76,7 +96,8 @@ export class CreatorComponent implements OnInit {
         imageNames: this.imageNames
       },
       height: '600px',
-      width: '1200px'
+      width: '1200px',
+      panelClass: 'dialogBack',
     });
 
     dialogRef.afterClosed().subscribe(result => {

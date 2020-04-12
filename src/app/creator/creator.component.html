@@ -22,36 +22,69 @@
       </ul>
     </div>
   </nav>
-  <div class="containter" style="padding: 20px">
+  <div class="containter" style="padding: 20px; padding-top: 50px; padding-bottom: 100px">
     <h1 style="width: 80%; margin: 0 auto; float: none">Create Your Song</h1><br>
     <div class="card border-danger mb-3" style="width: 80%; margin: 0 auto; float: none">
-      <div class="row" style="padding-left: 50px; padding-right: 50px; padding-top: 30px; padding-bottom: 20px; width: 50%">
-        <input type="text" class="form-control" placeholder="Song Name" id="name">
+      <div class="row animated fadeIn slower" style="padding-left: 50px; padding-right: 50px; padding-top: 30px; padding-bottom: 20px; width: 50%">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Song Name</mat-label>
+          <input matInput [formControl]="name" [errorStateMatcher]="matcher" placeholder="Example: Purple Rain" id="name">
+          <mat-error *ngIf="name.hasError('required')">
+            Song name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
       </div>
       <div class="row">
-        <div class="input-group" style="padding-left: 50px; padding-right: 50px;">
-          <input type="text" class="form-control" placeholder="Enter amount of chords" id="chords">
+        <div class="input-group animated fadeIn slower delay-1s" style="padding-left: 50px; padding-right: 50px;">
+          <mat-form-field appearance="fill" style="width: 92%">
+            <mat-label>Number of Chords: </mat-label>
+            <input matInput [formControl]="number" [errorStateMatcher]="matcher" placeholder="Example: 4" id="chords">
+            <mat-error *ngIf="number.hasError('pattern')">
+              Please enter a <strong>number</strong>
+            </mat-error>
+            <mat-error *ngIf="number.hasError('min')">
+              Please enter a <strong>number</strong> bigger than 0
+            </mat-error>
+          </mat-form-field>
           <span class="input-group-btn">
-            <button mat-raised-button class="btn btn-danger" type="button" (click)=displayChords()>Enter</button>
+            <button mat-raised-button class="btn btn-danger" type="button" (click)=displayChords()
+            style="height: 75%">Enter</button>
           </span>
         </div>
-        <div class="col-sm-4" *ngFor="let chord of numChords; let i = index" style="padding-left: 50px; padding-right: 50px; padding-top: 20px">
-          <div class="input-group">
-            <input [attr.id]="chord" type="text" class="form-control" placeholder="Enter chord {{ i + 1 }}">
+        <div class="row" style="padding-left: 15px; padding-right: 15px;"*ngIf="numChords.length > 0">
+          <div class="outer animated fadeIn slower col-md-12">
+            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-muzicodes.appspot.com/o/designs%2FPianoNotes.jpg?alt=media&token=2b5dc25c-5e2d-4149-a413-978f29fe65b1"
+            style="height: 90%; width: 90%; object-fit: cover">
           </div>
-        </div>
-        <div class="row" style="text-align: center; padding-left: 50px; padding-right: 50px; padding-top: 20px">
-          <button *ngIf="numChords.length != 0" mat-raised-button class="btn btn-danger" type="button" (click)="enterChordsButton(chord)">Enter Chords</button>
+          <div class="outer animated fadeIn slower col-md-12">
+            <mat-hint style="color: red; text-align:center">
+              Please enter the chord in this format: <strong>C4,E4,G4</strong>
+            </mat-hint>
+          </div><br>
+          <div class="outer animated fadeIn slower col-md-12">
+            <mat-hint style="color: red; text-align:center">
+              No <strong>spaces</strong> in between!
+            </mat-hint>
+          </div>
+          <div class="col-sm-4 animated fadeIn slower" *ngFor="let chord of numChords; let i = index" style="padding-left: 50px; padding-right: 50px; padding-top: 20px">
+            <div class="input-group">
+              <input [attr.id]="chord" type="text" class="form-control" placeholder="Enter chord {{ i + 1 }}">
+            </div>
+          </div>
+          <div class="row animated fadeIn slower" style="text-align: center; padding-left: 50px; padding-right: 50px; padding-top: 20px">
+            <button *ngIf="numChords.length != 0" mat-raised-button class="btn btn-danger" type="button" (click)="enterChordsButton(chord)">Enter Chords</button>
+          </div>
         </div>
       </div>
       <h2 *ngIf="chords.length != 0">Choose photos for each chord</h2>
       <div class="row">
         <div class="col-sm-4" *ngFor="let chord of chords" style="padding-left: 50px; padding-right: 50px; padding-top: 20px">
-          <button style="width: 100%" mat-raised-button class="btn btn-danger" type="button" (click)=choosePhoto()>Chord: {{ numChord }}</button>
+          <button style="width: 100%" mat-raised-button class="btn btn-danger" type="button" (click)=choosePhoto()>Chord</button>
         </div>
       </div><br>
-      <div class="row" style="padding-left: 50px; padding-right: 50px; padding-bottom: 30px; margin: 0 auto; float: none">
-        <button style="width: 100%" mat-raised-button class="btn btn-danger" type="button" (click)=saveData()>Save</button>
+      <div class="outer animated fadeIn slower delay-1s" style="padding-bottom: 30px;">
+        <button style="width: 50%" mat-raised-button class="btn btn-danger" type="button"
+        (click)=saveData() [disabled]="!name.valid">Save</button>
       </div>
     </div>
   </div>
@@ -63,7 +96,7 @@
         <!-- Grid column -->
         <div class="col-md-6 mt-md-0 mt-3">
           <!-- Content -->
-          <h5 class="text-uppercase font-weight-bold" style="text-align: justify">Brief Information About Project</h5>
+          <h5 class="text-uppercase font-weight-bold" style="text-align: justify; color: #950740">Brief Information About Project</h5>
           <p class="footP">This website is my final year project and I am being supervised by Dr. Marina. My main goals are:</p>
           <p class="footP">   • To design and develop a performing arts-based technology that can be integrated within a classroom.</p>
           <p class="footP">   • Determine how the performing arts nurture skills such as thinking/cognitive, social, mathematical, reading and language skills at an early age?</p>
@@ -73,7 +106,7 @@
         <!-- Grid column -->
         <div class="col-md-6 mb-md-0 mb-3">
           <!-- Content -->
-          <h5 class="text-uppercase font-weight-bold">Contact Me:</h5>
+          <h5 class="text-uppercase font-weight-bold" style="color: #950740">Contact Me:</h5>
           <p class="footP">Name: Muhammad Ameerul Hady bin Zul Hadi</p>
           <p class="footP">Phone Number: 0162234826</p>
           <p class="footP">Email Address: hcymz1@nottingham.edu.my</p>

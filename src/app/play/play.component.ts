@@ -57,6 +57,7 @@ export class PlayComponent implements OnInit {
       },
       height: '600px',
       width: '1200px',
+      panelClass: 'dialogBack',
     });
 
     dialogRef.afterClosed().subscribe(result => {

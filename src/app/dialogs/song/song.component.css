@@ -1,0 +1,27 @@
+body {
+  background-color: #6f2232;
+}
+
+.card {
+  background: #6f2232;
+}
+
+h1 {
+  color: white;
+}
+
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close.mat-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  line-height: 14px;
+  min-width: auto;
+  color:white;
+}

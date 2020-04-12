@@ -22,11 +22,11 @@
       </ul>
     </div>
   </nav>
-  <div class="containter" style="padding: 20px">
+  <div class="containter" style="padding: 20px; padding-bottom: 100px">
     <h1>Play Page</h1>
     <div class="row card-group">
-      <div class="col-sm-2" *ngFor="let song of songs; let i = index" style="padding: 10px">
-        <div class="card">
+      <div class="col-sm-3" *ngFor="let song of songs; let i = index" style="padding: 10px">
+        <div class="card animated fadeIn slower">
           <div class="card-block" style="padding: 10px">
             <h3 class="card-title">{{ song.name }}</h3>
             <p class="card-text">Chords in this song: {{ song.chords.length }}</p>
@@ -47,7 +47,7 @@
         <!-- Grid column -->
         <div class="col-md-6 mt-md-0 mt-3">
           <!-- Content -->
-          <h5 class="text-uppercase font-weight-bold" style="text-align: justify">Brief Information About Project</h5>
+          <h5 class="text-uppercase font-weight-bold" style="text-align: justify; color: #950740">Brief Information About Project</h5>
           <p class="footP">This website is my final year project and I am being supervised by Dr. Marina. My main goals are:</p>
           <p class="footP">   • To design and develop a performing arts-based technology that can be integrated within a classroom.</p>
           <p class="footP">   • Determine how the performing arts nurture skills such as thinking/cognitive, social, mathematical, reading and language skills at an early age?</p>
@@ -57,7 +57,7 @@
         <!-- Grid column -->
         <div class="col-md-6 mb-md-0 mb-3">
           <!-- Content -->
-          <h5 class="text-uppercase font-weight-bold">Contact Me:</h5>
+          <h5 class="text-uppercase font-weight-bold" style="color: #950740">Contact Me:</h5>
           <p class="footP">Name: Muhammad Ameerul Hady bin Zul Hadi</p>
           <p class="footP">Phone Number: 0162234826</p>
           <p class="footP">Email Address: hcymz1@nottingham.edu.my</p>

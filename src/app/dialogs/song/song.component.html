@@ -1,10 +1,9 @@
-<div class="containter" style="padding: 20px">
-  <h1>{{ songName }}</h1>
-  <div class="row card-group">
-    <div class="card">
-      <div class="card-block" style="padding: 10px">
-        <img [src]="url" style="width: 50%; height: 10rem; object-fit: cover" id="url">
-      </div>
+<body>
+  <button class="close" mat-button (click)="refresh()">X</button>
+  <div class="containter" style="padding: 20px">
+    <h1>{{ songName }}</h1>
+    <div class="outer col-md-12">
+      <img [src]="url" style="width: 70%; height: 70%; object-fit: cover" id="url">
     </div>
   </div>
-</div>
+</body>

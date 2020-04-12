@@ -5,3 +5,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * {
   font-family: Rubik-Light;
 }
+
+.dialogBack .mat-dialog-container {
+  position: relative!important;
+  background-color: #6f2232;
+}
+
+.correct {
+  content:url(https://firebasestorage.googleapis.com/v0/b/fyp-muzicodes.appspot.com/o/designs%2FCorrect.png?alt=media&token=5978f285-0113-45fb-8194-d26830197b3e);
+  background: transparent !important;
+  box-shadow: none !important;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+}
+
+.wrong {
+  background: transparent;
+  content:url(https://firebasestorage.googleapis.com/v0/b/fyp-muzicodes.appspot.com/o/designs%2FWrong.png?alt=media&token=d3179b01-9ad1-4607-9b20-c02880b7d231);
+  background: transparent !important;
+  box-shadow: none !important;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+}

@@ -16,6 +16,7 @@ export class ChoosePhotoComponent implements OnInit {
               fileService: FileService) {
     this.images = fileService.getAllImages();
     this.imageNames = fileService.getAllImageNames();
+    dialogRef.disableClose = true;
   }
 
   ngOnInit() {}

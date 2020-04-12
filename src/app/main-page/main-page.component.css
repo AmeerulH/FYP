@@ -43,6 +43,13 @@ h5 {
   line-height: middle;
 }
 
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .center {
   display: flex;
   justify-content: center;

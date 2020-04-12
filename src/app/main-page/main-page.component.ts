@@ -4,7 +4,6 @@ import { FileService } from '../services/file.service';
 import { FileUpload } from '../shared/fileUpload';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
-import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-main-page',
@@ -17,10 +16,7 @@ export class MainPageComponent implements OnInit {
   currentUpload: FileUpload;
   bool = true;
 
-  constructor(private fileService: FileService,
-              private midiService: MidiService) {
-    midiService.onMidiInit();
-  }
+  constructor(private fileService: FileService) {}
 
   ngOnInit() {}
 

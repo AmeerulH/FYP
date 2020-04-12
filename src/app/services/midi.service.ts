@@ -1,9 +1,9 @@
 import { Song } from '../shared/song';
 import { SongComponent } from '../dialogs/song/song.component';
-import { OnInit, Injectable } from '@angular/core';
+import { OnInit, Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UrlService } from './urls.service';
 import { FileService } from './file.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 
@@ -19,10 +19,33 @@ export class MidiService {
   private activeChord = [];
   private urls = [];
 
-  constructor(private urlService: UrlService,
-              private fileService: FileService) {
+  constructor(private fileService: FileService,
+              private snackBar: MatSnackBar,
+              private readonly zone: NgZone) {
     this.notes = this.fileService.getNotes();
     this.notesUrl = this.fileService.getNotesUrl();
+  }
+
+  snackBarCorrect() {
+    this.zone.run(() => {
+      this.snackBar.open('', '', {
+        duration: 1000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+        panelClass: ['correct']
+      });
+    });
+  }
+
+  snackBarWrong() {
+    this.zone.run(() => {
+      this.snackBar.open('', '', {
+        duration: 1000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+        panelClass: ['wrong']
+      });
+    });
   }
 
   // request MIDI access
@@ -96,14 +119,15 @@ export class MidiService {
             // tslint:disable-next-line: prefer-for-of
             if (this.activeChord[i] !== this.chords[this.turn].chord[i]) {
               match = false;
+              this.snackBarWrong();
               break;
             }
           }
 
           if (match) {
             console.log('Correct Chord!');
-            this.urlService.updateUrlList(this.urls[this.turn]);
             document.getElementById('url').setAttribute('src', this.urls[this.turn]);
+            this.snackBarCorrect();
             this.turn++;
           }
 

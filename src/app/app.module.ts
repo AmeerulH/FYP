@@ -20,8 +20,8 @@ import { PlayComponent } from './play/play.component';
 import { ChoosePhotoComponent } from './dialogs/choose-photo/choose-photo.component';
 import { SongsListComponent } from './services/songs-list/songs-list.component';
 import { SongComponent } from './dialogs/song/song.component';
-import { UrlService } from './services/urls.service';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,12 +45,13 @@ import { DeferLoadModule } from '@trademe/ng-defer-load';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    DeferLoadModule
+    DeferLoadModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     MidiService,
     FileService,
-    UrlService,
     { provide: StorageBucket, useValue: 'fyp-muzicodes.appspot.com' }
   ],
   bootstrap: [AppComponent],

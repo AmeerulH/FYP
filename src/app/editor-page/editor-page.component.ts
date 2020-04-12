@@ -37,6 +37,9 @@ export class EditorPageComponent implements OnInit {
     this.uploadSnackBar();
     this.images = this.fileService.getAllImages();
     this.imageNames = this.fileService.getAllImageNames();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/Editor']);
+    });
   }
 
   uploadMulti() {
@@ -59,6 +62,9 @@ export class EditorPageComponent implements OnInit {
     this.deleteSnackBar();
     this.images = this.fileService.getAllImages();
     this.imageNames = this.fileService.getAllImageNames();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/Editor']);
+    });
   }
 
   deleteSnackBar() {
